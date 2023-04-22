@@ -8,11 +8,10 @@ const mongoose = require("mongoose");
 
 //env config
 require("dotenv").config();
-// dotenv.config();
+
 
 //router import
-// const userRoutes = require("./routes/userRoutes");
-// const blogsRoutes = require("./routes/blogsRoutes");
+const todoRoutes = require("./routes/Route");
 
 
 
@@ -36,9 +35,7 @@ mongoose
     .catch((err) => {
         console.log(err.message);
     });
-//routes
-// app.use("/api/v1/user", userRoutes);
-// app.use("/api/v1/blog", blogsRoutes);
+app.use("/api/v1/todos", todoRoutes);
 
 
 
