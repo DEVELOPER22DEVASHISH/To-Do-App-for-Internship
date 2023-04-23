@@ -6,15 +6,16 @@ const TodoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    done: {
+    closed: {
         type: Boolean,
         default: false
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-})
+    
+  
+},
+{ timestamps: true }
+
+)
 
 const todo = mongoose.model('todo', TodoSchema);
 

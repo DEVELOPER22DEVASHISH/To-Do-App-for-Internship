@@ -2,18 +2,37 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { v4 as uuid } from "uuid";
 
+import axios from 'axios';
+
 const CreateTask = ({ tasks, setTasks }) => {
     const [task, setTask] = useState({
         id: "",
         name: "",
         // can also be in progress or closed
-        status: "todo"
+        status: "todo",
+
     });
 
     console.log(task);
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault();
+
+        // connecting f to b 
+
+        try {
+            const {data} = await axios.post('/api/v1/todos/create-todos',{
+                text:task.text
+
+            });
+
+            if (data?.success) {
+                console.log("task created")}
+
+        } catch (error) {
+            console.log(error)
+            
+        }
 
         if (task.name.length < 3)
             return toast.error("A Task must have more than 3 characters");
@@ -22,7 +41,7 @@ const CreateTask = ({ tasks, setTasks }) => {
             return toast.error("A Task must not be more than 100 characters");
 
         setTasks((prev) => {
-            const list = [...tasks, task];
+            const list = [...prev, task];
 
             localStorage.setItem("tasks", JSON.stringify(list));
 
@@ -35,7 +54,7 @@ const CreateTask = ({ tasks, setTasks }) => {
             id: "",
             name: "",
             // can also be in progress or closed
-            status: "todo"
+            status: "todo",
         });
 
     }

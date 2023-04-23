@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import  toast  from "react-hot-toast";
 
+
+import axios from 'axios';
+
 const ListTasks = ({ tasks, setTasks }) => {
 
     const [todos, setTodos] = useState([]);
@@ -100,7 +103,24 @@ const Task = ({ task, tasks, setTasks }) => {
 
       console.log(isDragging)
 
-    const handleRemove = (id) => {
+    const handleRemove = async (id) => {
+
+        try {
+            const {data} = await axios.delete(`/api/v1/todos/create-todos/delete-todos/:id/${id}`,{
+                text:todos.text
+
+            });
+
+            if (data?.success) {
+                console.log("todoss deleted")
+                window.location.reload();
+            }
+
+        } catch (error) {
+            console.log(error)
+            
+        }
+
         console.log(id);
 
         const fTasks = tasks.filter(t => t.id !==id)
