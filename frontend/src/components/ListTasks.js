@@ -107,7 +107,7 @@ const Task = ({ task, tasks, setTasks }) => {
 
         try {
             const {data} = await axios.delete(`/api/v1/todos/create-todos/delete-todos/:id/${id}`,{
-                text:todos.text
+                text:tasks.text
 
             });
 
