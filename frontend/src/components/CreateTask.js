@@ -22,7 +22,7 @@ const CreateTask = ({ tasks, setTasks }) => {
 
         try {
             const {data} = await axios.post('/api/v1/todos/create-todos',{
-                text:task.text
+                text:tasks.text
 
             });
 
